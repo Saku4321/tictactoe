@@ -22,8 +22,8 @@ def checking_diagonal2(rows):
     ai = sum(1 for i in diag if i == 'O')
     return player, ai
 def check_if_movement_is_possible(r):
-    for i in r:
-        if(i==' '):
+    for i,val in enumerate(r):
+        if val == ' ':
             return i
     else:
         return False
