@@ -1,88 +1,20 @@
+import player_movement
+import movement_check
+import ai_movement
 def display(rows):
     for i in range(len(rows)):
         print(rows[i])
-def picking_row(r1,r2,r3):
-    print('Please select row where you want to pick line: 1, 2 or 3')
-    while True:
-        u = input().strip()
-        if u in ('1', '2', '3'):
-            return int(u) - 1
-        print('Select 1, 2 or 3')
-def picking_place_in_row(r1, r2, r3, row_idx):
-    rows=[r1,r2,r3]
-    row = rows[row_idx]
-    print('Pick place in row where you want to pick line: 1,2,3')
-    while True:
-        u = input().strip()
-        if u in ('1', '2', '3'):
-            col = int(u) - 1
-            if row[col] == ' ':
-                row[col] = 'X'
-                return
-            else:
-                print('This place is taken.Try to choose another place.')
-        else:
-            print('Pick from 1, 2 or 3')
-def checking_row(r):
-    player = sum(1 for i in r if i == 'X')
-    ai = sum(1 for i in r if i == 'O')
-    return player, ai
-def checking_column(r1, r2, r3, n):
-    col = [r1[n], r2[n], r3[n]]
-    player = sum(1 for i in col if i == 'X')
-    ai = sum(1 for i in col if i == 'O')
-    return player, ai
-def checking_diagonal1(r1, r2, r3):
-    diag = [r1[0], r2[1], r3[2]]
-    player = sum(1 for i in diag if i == 'X')
-    ai = sum(1 for i in diag if i == 'O')
-    return player, ai
-
-def checking_diagonal2(r1, r2, r3):
-    diag = [r1[2], r2[1], r3[0]]
-    player = sum(1 for i in diag if i == 'X')
-    ai = sum(1 for i in diag if i == 'O')
-    return player, ai
-def check_if_movement_is_possible(r):
-    for i in r:
-        if(i==' '):
-            return i
-        else:
-            return False
-def board_full(r1, r2, r3):
-    return all(cell != ' ' for row in (r1, r2, r3) for cell in row)
-def ai_move(r1,r2,r3):
-    rows=[r1,r2,r3]
-    for i in rows:
-        player, ai = checking_row(i)
-        if(ai ==2 and check_if_movement_is_possible(i)!= False):
-            i = 'O'
-            return rows
-
-def winner(r1, r2, r3):
-    # row
-    for r in (r1, r2, r3):
-        if r == ['X','X','X']: return 'X'
-        if r == ['O','O','O']: return 'O'
-    # column
-    for c in range(3):
-        col = [r1[c], r2[c], r3[c]]
-        if col == ['X','X','X']: return 'X'
-        if col == ['O','O','O']: return 'O'
-    # diagonal
-    d1 = [r1[0], r2[1], r3[2]]
-    d2 = [r1[2], r2[1], r3[0]]
-    if d1 == ['X','X','X'] or d2 == ['X','X','X']: return 'X'
-    if d1 == ['O','O','O'] or d2 == ['O','O','O']: return 'O'
-    return None
 r1 = [' ',' ',' ']
 r2 = [' ',' ',' ']
 r3 = [' ',' ',' ']
 rows = [r1,r2,r3]
 display(rows)
-row_idx=picking_row(r1,r2,r3)
-picking_place_in_row(r1,r2,r3,row_idx)
+row_idx=player_movement.picking_row()
+player_movement.picking_place_in_row(rows,row_idx)
 display(rows)
-winner(r1,r2,r3)
+movement_check.wincheck(rows)
+ai_movement.ai_move(rows)
+display(rows)
+movement_check.wincheck(rows)
 
 
