@@ -88,7 +88,7 @@ def ai_move(rows):
     #ai check attacking move for columns
     for c in range(3):
         player, ai = movement_check.checking_column(rows, c)
-        if ai == 2:
+        if ai == 1:
             for r in range(3):
                 if rows[r][c] == ' ':
                     rows[r][c] = 'O'
@@ -119,7 +119,7 @@ def ai_move(rows):
     #ai normal defense move for columns
     for c in range(3):
         player, ai = movement_check.checking_column(rows, c)
-        if ai == 2:
+        if player == 1:
             for r in range(3):
                 if rows[r][c] == ' ':
                     rows[r][c] = 'O'
