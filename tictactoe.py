@@ -9,12 +9,13 @@ r2 = [' ',' ',' ']
 r3 = [' ',' ',' ']
 rows = [r1,r2,r3]
 display(rows)
-row_idx=player_movement.picking_row()
-player_movement.picking_place_in_row(rows,row_idx)
-display(rows)
-movement_check.wincheck(rows)
-ai_movement.ai_move(rows)
-display(rows)
-movement_check.wincheck(rows)
+while True:
+    row_idx=player_movement.picking_row()
+    player_movement.picking_place_in_row(rows,row_idx)
+    display(rows)
+    if(movement_check.wincheck(rows)=='True'): break
+    ai_movement.ai_move(rows)
+    display(rows)
+    if(movement_check.wincheck(rows)=='True'): break
 
 

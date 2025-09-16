@@ -51,9 +51,12 @@ def wincheck(rows):
 
     if (winner(rows) == 'X'):
         print('X wins!')
+        return True
     elif (winner(rows) == 'O'):
         print('O wins!')
+        return True
     elif (winner(rows) == None and board_full(rows)):
         print('Draw')
+        return True
     else:
         pass
